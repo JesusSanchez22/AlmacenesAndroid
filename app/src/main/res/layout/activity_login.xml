@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login">
+
+    <TextView
+        android:id="@+id/tvUsuarioLogin"
+        android:layout_width="90dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="244dp"
+        android:text="Usuario:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUsuarioLogin2"
+        android:layout_width="133dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="30dp"
+        android:text="Contraseña:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/etUserLogin"
+        app:layout_constraintTop_toBottomOf="@+id/etUserLogin" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="151dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="80dp"
+        android:onClick="verificar"
+        android:text="Iniciar Sesión"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
+
+    <EditText
+        android:id="@+id/etUserLogin"
+        android:layout_width="275dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Inserta tu usuario"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/tvUsuarioLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuarioLogin" />
+
+    <EditText
+        android:id="@+id/etPasswordLogin"
+        android:layout_width="275dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Inserta tu contraseña"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/tvUsuarioLogin2"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuarioLogin2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
