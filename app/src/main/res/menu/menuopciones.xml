@@ -9,6 +9,6 @@
         android:id="@+id/opcionClientes"
         android:title="Clientes" />
     <item
-        android:id="@+id/opcionMapa"
-        android:title="Mapa" />
+        android:id="@+id/opcionConfiguracion"
+        android:title="Configuración" />
 </menu>
