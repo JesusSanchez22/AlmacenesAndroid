@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlmacenesKikoAndroid"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Ventanas.ConfiguracionActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -29,22 +31,22 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Ventanas.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".DetallesPedidos"
+            android:name=".Ventanas.DetallesPedidos"
             android:exported="false"
             android:label="@string/title_activity_detalles_pedidos"
             android:theme="@style/Theme.AlmacenesKikoAndroid" />
         <activity
-            android:name=".AgregarProductoActivity"
+            android:name=".Ventanas.AgregarProductoActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductosActivity"
+            android:name=".Ventanas.ProductosActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Ventanas.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

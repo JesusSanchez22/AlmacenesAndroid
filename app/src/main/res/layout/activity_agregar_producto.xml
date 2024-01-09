@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AgregarProductoActivity">
+    tools:context=".Ventanas.AgregarProductoActivity">
 
     <EditText
         android:id="@+id/etDescripción"
@@ -23,8 +23,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
-        android:layout_width="419dp"
-        android:layout_height="55dp"
+        android:layout_width="411dp"
+        android:layout_height="67dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />

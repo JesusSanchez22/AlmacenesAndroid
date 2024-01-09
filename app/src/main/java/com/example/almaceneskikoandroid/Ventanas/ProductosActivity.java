@@ -1,29 +1,36 @@
-package com.example.almaceneskikoandroid;
+package com.example.almaceneskikoandroid.Ventanas;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 
+import com.example.almaceneskikoandroid.MiDBHelper;
+import com.example.almaceneskikoandroid.Producto;
+import com.example.almaceneskikoandroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProductosActivity extends AppCompatActivity {
 
+    MiDBHelper miDBHelper;
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
+
+        miDBHelper = new MiDBHelper(this);
 
         setSupportActionBar(findViewById(R.id.toolbar2));
         getSupportActionBar().setTitle("Productos");
@@ -42,20 +49,17 @@ public class ProductosActivity extends AppCompatActivity {
 
         ListView lista = findViewById(R.id.ListView);
 
-        ArrayList<String> productos = new ArrayList<String>();
+        List<Producto> datosProductos = miDBHelper.obtenerDatosProductos();
 
-        productos.add("Huevos");
-        productos.add("Vino");
-        productos.add("Patatas");
-        productos.add("Pan");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, productos);
+        ArrayAdapter<Producto> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, datosProductos);
 
         lista.setAdapter(adapter);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
 
             }
         });
