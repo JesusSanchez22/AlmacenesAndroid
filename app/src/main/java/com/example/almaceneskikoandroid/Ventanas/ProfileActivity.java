@@ -1,8 +1,10 @@
-package com.example.almaceneskikoandroid;
+package com.example.almaceneskikoandroid.Ventanas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.almaceneskikoandroid.R;
 
 public class ProfileActivity extends AppCompatActivity {
 

@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:map="http://schemas.android.com/apk/res-auto"
-    tools:context=".MapsActivity">
+    tools:context=".Ventanas.MapsActivity">
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="411dp"
-        android:layout_height="545dp"
-        android:layout_marginTop="96dp"
+        android:layout_width="412dp"
+        android:layout_height="496dp"
+        android:layout_marginTop="140dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         map:cameraZoom="10"
@@ -36,12 +37,24 @@
         android:layout_width="382dp"
         android:layout_height="29dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:text=" "
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="418dp"
+        android:layout_height="62dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Ubicación" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

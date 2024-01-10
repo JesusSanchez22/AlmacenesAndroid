@@ -1,4 +1,4 @@
-package com.example.almaceneskikoandroid;
+package com.example.almaceneskikoandroid.Ventanas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.almaceneskikoandroid.R;
 import com.example.almaceneskikoandroid.functions.Funciones;
 
 

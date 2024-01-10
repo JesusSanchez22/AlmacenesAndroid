@@ -1,52 +1,83 @@
 package com.example.almaceneskikoandroid.Ventanas;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.almaceneskikoandroid.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.almaceneskikoandroid.databinding.ActivityMapsBinding;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import java.net.URL;
+
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private ActivityMapsBinding binding;
 
+    TextView txtTitleMap;
+    private String nombreCliente, urlIr, calle, ciudad;
+    private int num, cp;
+
+    private double latitud, longitud;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
 
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        txtTitleMap = findViewById(R.id.txtTitleMap);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //Se recogerá de la base de datos
+        nombreCliente = "Bar Manolo";
+
+        //Text titulo del map, "Ubicación de : " + nombreCliente
+        txtTitleMap.setText(getString(R.string.ubicaci_n_de) + nombreCliente);
+
+        //Se recogerá de la base de datos
+        calle = "Mirabel";
+        num = 25;
+        cp = 47010;
+        ciudad = "Valladolid";
+
+        urlIr = "https://www.google.es/maps/dir//" + calle + ",+" + num + ",+" + cp + "+" + ciudad + "/";
+
+        //Se recogerá de la base de datos
+        latitud = 41.664665;
+        longitud = -4.722739;
+
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    public void irUbicacion(View v){
+        Uri link = Uri.parse(urlIr);
+        Intent i = new Intent(Intent.ACTION_VIEW, link);
+        startActivity(i);
+    }
+
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng mapClient = new LatLng(latitud, longitud);
+
+        mMap.addMarker(new MarkerOptions().position(mapClient).title(nombreCliente));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(mapClient));
+
     }
 }
