@@ -1,4 +1,6 @@
 <resources>
+    <string name="app_name">AlmacenesKikoAndroid</string>
+    <string name="ubicaci_n_de">"Ubicación de: "</string>
     <string name="app_name">Inicio</string>
     <string name="title_activity_detalles_pedidos">DetallesPedidos</string>
     <!-- Strings used for fragments for navigation -->

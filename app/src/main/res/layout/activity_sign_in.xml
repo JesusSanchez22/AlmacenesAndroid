@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignIn">
+
+    <TextView
+        android:id="@+id/tvNIF"
+        android:layout_width="230dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="20dp"
+        android:text="NIF:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/etPasswordSignIn2"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordSignIn2" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPasswordSignIn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:onClick="ShowPasswordSignIn"
+        android:text="Visible"
+        app:layout_constraintStart_toEndOf="@+id/etPasswordSignIn2"
+        app:layout_constraintTop_toTopOf="@+id/etPasswordSignIn2" />
+
+    <EditText
+        android:id="@+id/etPasswordSignIn2"
+        android:layout_width="250dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:password="true"
+        app:layout_constraintStart_toStartOf="@+id/tvPasswordSignIn2"
+        app:layout_constraintTop_toBottomOf="@+id/tvPasswordSignIn2" />
+
+    <TextView
+        android:id="@+id/tvUsuarioLogin9"
+        android:layout_width="133dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Contraseña:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/etUserSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/etUserSignIn" />
+
+    <TextView
+        android:id="@+id/tvPasswordSignIn"
+        android:layout_width="133dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Contraseña:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/etUserSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/etUserSignIn" />
+
+    <TextView
+        android:id="@+id/tvPasswordSignIn2"
+        android:layout_width="229dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="20dp"
+        android:text="Repite la contraseña:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/etPasswordSignIn1"
+        app:layout_constraintTop_toBottomOf="@+id/etPasswordSignIn1" />
+
+    <EditText
+        android:id="@+id/etPasswordSignIn1"
+        android:layout_width="250dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:password="true"
+        app:layout_constraintStart_toStartOf="@+id/tvUsuarioLogin9"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuarioLogin9" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPasswordSignIn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:onClick="ShowPasswordSignIn"
+        android:text="Visible"
+        app:layout_constraintStart_toEndOf="@+id/etPasswordSignIn1"
+        app:layout_constraintTop_toTopOf="@+id/etPasswordSignIn1" />
+
+    <TextView
+        android:id="@+id/tvUsuarioSignIn"
+        android:layout_width="90dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="76dp"
+        android:text="Usuario:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etUserSignIn"
+        android:layout_width="250dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/tvUsuarioSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuarioSignIn" />
+
+    <EditText
+        android:id="@+id/etUserSignIn2"
+        android:layout_width="250dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/tvNIF"
+        app:layout_constraintTop_toBottomOf="@+id/tvNIF" />
+
+    <Button
+        android:id="@+id/btnBackSignIn"
+        android:layout_width="126dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="68dp"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="126dp"
+        android:layout_height="61dp"
+        android:text="Registrarse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toEndOf="@+id/btnBackSignIn"
+        app:layout_constraintTop_toTopOf="@+id/btnBackSignIn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
