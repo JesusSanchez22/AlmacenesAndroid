@@ -2,12 +2,13 @@ package com.example.almaceneskikoandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.almaceneskikoandroid.functions.Funciones;
 
@@ -17,6 +18,7 @@ public class login extends AppCompatActivity {
 
     private CheckBox checkBox;
     private EditText etUserLogin, etPasswordLogin;
+    private TextView txtRegistro;
 
     //Perfil 1
     private String user1 = "raul";
@@ -38,24 +40,23 @@ public class login extends AppCompatActivity {
 
         checkBox.setChecked(false);
 
+        //txtRegistro = findViewById(R.id.txtRegistro);
+
     }
 
-    public void ShowPassword(View v) {
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    etPasswordLogin.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                } else {
-                    etPasswordLogin.setInputType(129);
-                }
-            }
-        });
+    public void ShowPasswordLogIn(View v) {
+        boolean checked = checkBox.isChecked();
+
+        if(checked) {
+            etPasswordLogin.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            etPasswordLogin.setInputType(129);
+        }
     }
-
-
 
     public void verificar(View v){
+
+        Intent i = new Intent(this, MapsActivity.class);
 
         String usuarioIn = etUserLogin.getText().toString();
         String contrasenaIn = etPasswordLogin.getText().toString();
@@ -66,12 +67,19 @@ public class login extends AppCompatActivity {
             Funciones.mostrarToastCorto(this,"La contraseña no puede estar vacía");
         } else if (usuarioIn.equals(user1) && contrasenaIn.equals(passwordUser1)){
             Funciones.mostrarToastCorto(this,"Contraseña correcta user1");
+            startActivity(i);
             //cambiarActivity(.class);
         } else if (usuarioIn.equals(user2) && contrasenaIn.equals(passwordUser2)){
             Funciones.mostrarToastCorto(this,"Contraseña correcta user2");
+            startActivity(i);
             //cambiarActivity(.class);
         } else {
             Funciones.mostrarToastCorto(this, "Usuario o Contraseña Incorrectos");
         }
+    }
+
+    public void irRegistro(View v){
+        Intent i = new Intent(this, SignIn.class);
+        startActivity(i);
     }
 }

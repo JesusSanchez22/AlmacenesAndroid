@@ -18,6 +18,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvUsuarioLogin3"
+        android:layout_width="90dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="244dp"
+        android:text="Usuario:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvUsuarioLogin2"
         android:layout_width="133dp"
         android:layout_height="32dp"
@@ -40,7 +51,7 @@
 
     <EditText
         android:id="@+id/etUserLogin"
-        android:layout_width="275dp"
+        android:layout_width="250dp"
         android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -51,7 +62,7 @@
 
     <EditText
         android:id="@+id/etPasswordLogin"
-        android:layout_width="275dp"
+        android:layout_width="250dp"
         android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -62,13 +73,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tvUsuarioLogin2" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtRegistro"
         android:layout_width="101dp"
         android:layout_height="21dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:contextClickable="false"
+        android:focusable="auto"
+        android:onClick="irRegistro"
         android:text="Registrarse"
+        android:textColor="#837F7F"
         app:layout_constraintStart_toStartOf="@+id/etPasswordLogin"
         app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
 
@@ -76,8 +90,9 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="ShowPassword"
-        android:text="CheckBox"
+        android:layout_marginStart="16dp"
+        android:onClick="ShowPasswordLogIn"
+        android:text="Visible"
         app:layout_constraintStart_toEndOf="@+id/etPasswordLogin"
         app:layout_constraintTop_toTopOf="@+id/etPasswordLogin" />
 

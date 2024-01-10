@@ -13,6 +13,17 @@
         android:theme="@style/Theme.AlmacenesKikoAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCjD4BTQyoqRUs0jSs4zpLfAZs6XUtMO30" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignIn"
             android:exported="false" />
         <activity

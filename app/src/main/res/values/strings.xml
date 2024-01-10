@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AlmacenesKikoAndroid</string>
+    <string name="ubicaci_n_de">"Ubicación de: "</string>
 </resources>
