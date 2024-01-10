@@ -1,5 +1,7 @@
 package com.example.almaceneskikoandroid.Ventanas;
 
+import static com.example.almaceneskikoandroid.Ventanas.MainActivity.pedidoSeleccionado;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -45,29 +47,29 @@ public class DetallesPedidos extends AppCompatActivity {
         TextView idProductoTV = findViewById(R.id.id_productoVacio);
         TextView cantidadTV = findViewById(R.id.cantidadVacio);
 
-        for(Pedido pedido : tablaPedidos){
+
 
             TableRow row = new TableRow(this);
 
 
-            idPedidoTV.setText(String.valueOf(pedido.getId_pedido()));
+            idPedidoTV.setText(String.valueOf(pedidoSeleccionado.getId_pedido()));
 
 
 
-            idClienteTV.setText(String.valueOf(pedido.getId_cliente()));
+            idClienteTV.setText(String.valueOf(pedidoSeleccionado.getId_cliente()));
 
 
 
-            idProductoTV.setText(String.valueOf(pedido.getId_producto()));
+            idProductoTV.setText(String.valueOf(pedidoSeleccionado.getId_producto()));
 
 
 
-            cantidadTV.setText(String.valueOf(pedido.getCantidad()));
+            cantidadTV.setText(String.valueOf(pedidoSeleccionado.getCantidad()));
 
 
             tableLayout.addView(row);
 
-        }
+
 
         buttonMapa.setOnClickListener(new View.OnClickListener() {
             @Override

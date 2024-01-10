@@ -8,15 +8,26 @@ public class Producto {
     private int cantidad;
     private String descripcion;
 
+    private byte[] imagen;
+
     public Producto() {
     }
 
-    public Producto(int id_producto, String nombre, double precio, int cantidad, String descripcion) {
+    public Producto(int id_producto, String nombre, double precio, int cantidad, String descripcion, byte[] imagen) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
         this.descripcion = descripcion;
+        this.imagen = imagen;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
     public int getId_producto() {

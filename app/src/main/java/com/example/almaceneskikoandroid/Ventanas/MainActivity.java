@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Pedido pedidoSeleccionado;
+
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -43,11 +45,16 @@ public class MainActivity extends AppCompatActivity {
         lista.setAdapter(adapter);
 
 
+
+
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, DetallesPedidos.class);
                 startActivity(intent);
+
+                pedidoSeleccionado = (Pedido) lista.getItemAtPosition(position);
+
             }
         });
 

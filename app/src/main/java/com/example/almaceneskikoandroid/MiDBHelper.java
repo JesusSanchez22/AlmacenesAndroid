@@ -19,7 +19,7 @@ import java.util.List;
 public class MiDBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "bd_Almacenes";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     public MiDBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -36,7 +36,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createTableProductos = "CREATE TABLE productos(id_producto integer, nombre varchar(50), descripcion varchar(500) DEFAULT NULL, precio decimal(10,2), cantidad integer,PRIMARY KEY (id_producto, cantidad))";
+        String createTableProductos = "CREATE TABLE productos(id_producto integer, nombre varchar(50), descripcion varchar(500) DEFAULT NULL, precio decimal(10,2), cantidad integer, imagen BLOB, PRIMARY KEY (id_producto, cantidad))";
         db.execSQL(createTableProductos);
 
         String createTablePedidos = "CREATE TABLE pedidos(id_pedido integer, id_producto integer, cantidad integer, id_cliente integer)";
@@ -51,7 +51,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertarProductos(int id, String nombre, double precio, int cantidad, String descripcion){
+    public void insertarProductos(int id, String nombre, double precio, int cantidad, String descripcion, byte[] imagen){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -60,6 +60,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         values.put("descripcion", descripcion);
         values.put("precio", precio);
         values.put("cantidad", cantidad);
+        values.put("imagen", imagen);
         db.insert("productos", null, values);
         db.close();
 
@@ -129,8 +130,9 @@ public class MiDBHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") double precio = Double.parseDouble(cursor.getString(cursor.getColumnIndex("precio")));
                 @SuppressLint("Range") int cantidad = Integer.parseInt(cursor.getString(cursor.getColumnIndex("cantidad")));
                 @SuppressLint("Range") String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+                @SuppressLint("Range") byte[] imagen = cursor.getString(cursor.getColumnIndex("descripcion")).getBytes();
 
-                Producto producto = new Producto(id, nombre, precio, cantidad, descripcion);
+                Producto producto = new Producto(id, nombre, precio, cantidad, descripcion, imagen);
                 listaProductos.add(producto);
 
             }while(cursor.moveToNext());
