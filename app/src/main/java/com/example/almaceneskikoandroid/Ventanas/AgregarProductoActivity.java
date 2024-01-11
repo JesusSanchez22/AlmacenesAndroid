@@ -2,9 +2,11 @@ package com.example.almaceneskikoandroid.Ventanas;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -15,9 +17,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.almaceneskikoandroid.MiDBHelper;
+import com.example.almaceneskikoandroid.Producto;
 import com.example.almaceneskikoandroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,6 +32,8 @@ public class AgregarProductoActivity extends AppCompatActivity {
 
     MiDBHelper dbHelper = new MiDBHelper(this);
     byte[] imagen;
+
+    Producto producto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,7 @@ public class AgregarProductoActivity extends AppCompatActivity {
         EditText etId = findViewById(R.id.etID);
         EditText etNombre = findViewById(R.id.etNombre);
         EditText etPrecio = findViewById(R.id.etPrecio);
-        //EditText etCantidad = findViewById(R.id.etCantidad);
+        EditText etCantidad = findViewById(R.id.etCantidad);
         EditText etDescripcion = findViewById(R.id.etDescripción);
 
 
