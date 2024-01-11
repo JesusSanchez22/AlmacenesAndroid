@@ -53,13 +53,13 @@ public class DetallesProductosActivity extends AppCompatActivity {
 
         String idString = String.valueOf(id_producto_static);
         String precioString = String.valueOf(precio_producto_static);
-        String cantidadString = String.valueOf(cantidad_producto_static);
+        //String cantidadString = String.valueOf(cantidad_producto_static);
 
 
         etID_Detalles.setText(idString);
         etNombre_Detalles.setText(nombre_producto_static);
         etPrecio_Detalles.setText(precioString);
-        etCantidad_Detalles.setText(cantidadString);
+        //etCantidad_Detalles.setText(cantidadString);
         etDescripcion_Detalles.setText(descripcion_producto_static);
 
         if (imagen_producto_static != null && imagen_producto_static.length > 0) {

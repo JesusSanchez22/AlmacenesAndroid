@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton flActionButton;
 
+    MiDBHelper miDBHelper;
+
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MiDBHelper miDBHelper = new MiDBHelper(this);
-
         setSupportActionBar(findViewById(R.id.toolbar));
 
-        ListView lista = findViewById(R.id.listaNotificaciones);
+        miDBHelper = new MiDBHelper(this);
 
+        ListView lista = findViewById(R.id.listaNotificaciones);
 
         List<Pedido> datosPedidos = miDBHelper.obtenerDatosPedidos();
 

@@ -41,7 +41,7 @@ public class AgregarProductoActivity extends AppCompatActivity {
         EditText etId = findViewById(R.id.etID);
         EditText etNombre = findViewById(R.id.etNombre);
         EditText etPrecio = findViewById(R.id.etPrecio);
-        EditText etCantidad = findViewById(R.id.etCantidad);
+        //EditText etCantidad = findViewById(R.id.etCantidad);
         EditText etDescripcion = findViewById(R.id.etDescripción);
 
 
@@ -72,15 +72,16 @@ public class AgregarProductoActivity extends AppCompatActivity {
                 String id_string = String.valueOf(etId.getText());
                 String nombre = String.valueOf(etNombre.getText());
                 String precio_string = String.valueOf(etPrecio.getText());
-                String cantidad_string = String.valueOf(etCantidad.getText());
+                //String cantidad_string = String.valueOf(etCantidad.getText());
                 String descripcion = String.valueOf(etDescripcion.getText());
 
 
                 int id = Integer.parseInt(id_string);
                 double precio = Double.parseDouble(precio_string);
-                int cantidad = Integer.parseInt(cantidad_string);
 
-                dbHelper.insertarProductos(id, nombre, precio, cantidad, descripcion, imagen);
+                //int cantidad = Integer.parseInt(cantidad_string);
+
+                dbHelper.insertarProductos(id, nombre, precio, descripcion, imagen);
 
                 mediaPlayer.start();
 

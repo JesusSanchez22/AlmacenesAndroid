@@ -22,12 +22,13 @@
 
     <ListView
         android:id="@+id/listaNotificaciones"
-        android:layout_width="412dp"
-        android:layout_height="586dp"
+        android:layout_width="406dp"
+        android:layout_height="508dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent">
 
     </ListView>
 

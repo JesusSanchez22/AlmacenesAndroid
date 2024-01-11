@@ -73,7 +73,7 @@ public class ProductosActivity extends AppCompatActivity {
                 id_producto_static = productoSeleccionado.getId_producto();
                 nombre_producto_static = productoSeleccionado.getNombre();
                 precio_producto_static = productoSeleccionado.getPrecio();
-                cantidad_producto_static = productoSeleccionado.getCantidad();
+                //cantidad_producto_static = productoSeleccionado.getCantidad();
                 descripcion_producto_static = productoSeleccionado.getDescripcion();
                 imagen_producto_static = productoSeleccionado.getImagen();
 

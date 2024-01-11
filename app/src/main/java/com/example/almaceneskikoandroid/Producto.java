@@ -22,6 +22,14 @@ public class Producto {
         this.imagen = imagen;
     }
 
+    public Producto(int id_producto, String nombre, double precio, String descripcion, byte[] imagen) {
+        this.id_producto = id_producto;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+    }
+
     public byte[] getImagen() {
         return imagen;
     }

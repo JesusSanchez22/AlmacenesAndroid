@@ -41,6 +41,9 @@ public class login extends AppCompatActivity {
 
         checkBox.setChecked(false);
 
+        etUserLogin.setText(user1);
+        etPasswordLogin.setText(passwordUser1);
+
         //txtRegistro = findViewById(R.id.txtRegistro);
 
     }
