@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.almaceneskikoandroid.MiDBHelper;
 import com.example.almaceneskikoandroid.Pedido;
@@ -37,8 +38,8 @@ public class DetallesPedidos extends AppCompatActivity {
         addBackButtonInToolbar(toolbar2, DetallesPedidos.this);
 
         Button buttonMapa = findViewById(R.id.buttonMap);
+        Button buttonCompletado = findViewById(R.id.buttonCompletado);
 
-        List<Pedido> tablaPedidos = miDBHelper.obtenerDatosPedidos();
 
         TableLayout tableLayout = findViewById(R.id.tableLayout);
 
@@ -76,6 +77,20 @@ public class DetallesPedidos extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DetallesPedidos.this, MapsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        buttonCompletado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                miDBHelper.eliminarPedido(pedidoSeleccionado.getId_pedido());
+
+                Toast.makeText(DetallesPedidos.this, "Pedido completado con éxito", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(DetallesPedidos.this, MainActivity.class);
+                startActivity(intent);
+
             }
         });
 

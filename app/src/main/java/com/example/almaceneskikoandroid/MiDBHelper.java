@@ -130,7 +130,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") double precio = Double.parseDouble(cursor.getString(cursor.getColumnIndex("precio")));
                 @SuppressLint("Range") int cantidad = Integer.parseInt(cursor.getString(cursor.getColumnIndex("cantidad")));
                 @SuppressLint("Range") String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
-                @SuppressLint("Range") byte[] imagen = cursor.getString(cursor.getColumnIndex("descripcion")).getBytes();
+                @SuppressLint("Range") byte[] imagen = cursor.getBlob(cursor.getColumnIndex("imagen"));
 
                 Producto producto = new Producto(id, nombre, precio, cantidad, descripcion, imagen);
                 listaProductos.add(producto);
@@ -142,8 +142,43 @@ public class MiDBHelper extends SQLiteOpenHelper {
         db.close();
 
         return listaProductos;
+    }
 
+
+    public void modificarProducto(int id, String nombre, double precio, int cantidad, String descripcion, byte[] imagen){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put("id_producto", id);
+        values.put("nombre", nombre);
+        values.put("descripcion", descripcion);
+        values.put("precio", precio);
+        values.put("cantidad", cantidad);
+        values.put("imagen", imagen);
+
+        String whereClause = "id_producto = ?";
+        String[] whereArgs = {String.valueOf(id)};
+
+        db.update("productos", values, whereClause, whereArgs);
+
+        db.close();
+    }
+
+    public void eliminarProducto(int id_producto){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("DELETE FROM productos where id_producto =" + id_producto);
 
     }
 
+
+    public void eliminarPedido(int id_pedido){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("DELETE FROM pedidos where id_pedido =" + id_pedido);
+
+    }
 }

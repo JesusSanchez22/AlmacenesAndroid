@@ -1,10 +1,14 @@
 package com.example.almaceneskikoandroid.Ventanas;
 
+import static com.example.almaceneskikoandroid.Ventanas.ProductosActivity.productoSeleccionado;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -15,9 +19,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.almaceneskikoandroid.MiDBHelper;
+import com.example.almaceneskikoandroid.Producto;
 import com.example.almaceneskikoandroid.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,6 +34,8 @@ public class AgregarProductoActivity extends AppCompatActivity {
 
     MiDBHelper dbHelper = new MiDBHelper(this);
     byte[] imagen;
+
+    Producto producto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,25 +75,48 @@ public class AgregarProductoActivity extends AppCompatActivity {
         fbConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AgregarProductoActivity.this, "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
 
-                String id_string = String.valueOf(etId.getText());
-                String nombre = String.valueOf(etNombre.getText());
-                String precio_string = String.valueOf(etPrecio.getText());
-                String cantidad_string = String.valueOf(etCantidad.getText());
-                String descripcion = String.valueOf(etDescripcion.getText());
+                if(etId.getText().length()==0 || etNombre.getText().length() == 0 || etPrecio.getText().length() == 0 || etCantidad.getText().length()==0){
+
+                    AlertDialog.Builder dialogo1 = new AlertDialog.Builder(fbConfirmar.getContext());
+                    dialogo1.setTitle("Error");
+                    dialogo1.setMessage("No has rellenado alguno de los campos claves");
+                    dialogo1.setCancelable(false);
+                    dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+
+                        }
+                    });
+
+                    dialogo1.show();
+
+                }else{
+
+                    Toast.makeText(AgregarProductoActivity.this, "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
+
+                    String id_string = String.valueOf(etId.getText());
+                    String nombre = String.valueOf(etNombre.getText());
+                    String precio_string = String.valueOf(etPrecio.getText());
+                    String cantidad_string = String.valueOf(etCantidad.getText());
+                    String descripcion = String.valueOf(etDescripcion.getText());
 
 
-                int id = Integer.parseInt(id_string);
-                double precio = Double.parseDouble(precio_string);
-                int cantidad = Integer.parseInt(cantidad_string);
+                    int id = Integer.parseInt(id_string);
+                    double precio = Double.parseDouble(precio_string);
+                    int cantidad = Integer.parseInt(cantidad_string);
 
-                dbHelper.insertarProductos(id, nombre, precio, cantidad, descripcion, imagen);
+                    dbHelper.insertarProductos(id, nombre, precio, cantidad, descripcion, imagen);
 
-                mediaPlayer.start();
+                    mediaPlayer.start();
 
-                Intent intent = new Intent(AgregarProductoActivity.this, ProductosActivity.class);
-                startActivity(intent);
+                    Intent intent = new Intent(AgregarProductoActivity.this, ProductosActivity.class);
+                    startActivity(intent);
+
+                }
+
 
             }
         });
@@ -123,6 +154,7 @@ public class AgregarProductoActivity extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
             imagen = stream.toByteArray();
+
 
         }
 
