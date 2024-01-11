@@ -22,12 +22,8 @@ import java.util.List;
 
 public class ProductosActivity extends AppCompatActivity {
 
-    public static Integer id_producto_static;
-    public static String nombre_producto_static;
-    public static Double precio_producto_static;
-    public static Integer cantidad_producto_static;
-    public static String descripcion_producto_static;
-    public static byte[] imagen_producto_static;
+
+    public static Producto productoSeleccionado;
     MiDBHelper miDBHelper;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -68,15 +64,7 @@ public class ProductosActivity extends AppCompatActivity {
                 Intent intent = new Intent(ProductosActivity.this, DetallesProductosActivity.class);
                 startActivity(intent);
 
-                Producto productoSeleccionado = (Producto)lista.getItemAtPosition(position);
-
-                id_producto_static = productoSeleccionado.getId_producto();
-                nombre_producto_static = productoSeleccionado.getNombre();
-                precio_producto_static = productoSeleccionado.getPrecio();
-                cantidad_producto_static = productoSeleccionado.getCantidad();
-                descripcion_producto_static = productoSeleccionado.getDescripcion();
-                imagen_producto_static = productoSeleccionado.getImagen();
-
+                productoSeleccionado = (Producto)lista.getItemAtPosition(position);
 
 
             }
