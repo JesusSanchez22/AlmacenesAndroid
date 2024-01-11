@@ -39,7 +39,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         String createTableProductos = "CREATE TABLE productos(id_producto integer, nombre varchar(50), descripcion varchar(500) DEFAULT NULL, precio decimal(10,2), cantidad integer, imagen BLOB, PRIMARY KEY (id_producto, cantidad))";
         db.execSQL(createTableProductos);
 
-        String createTablePedidos = "CREATE TABLE pedidos(id_pedido integer, id_producto integer, cantidad integer, id_cliente integer)";
+        String createTablePedidos = "CREATE TABLE pedidos(id_pedido integer primary key autoincrement, id_producto integer, cantidad integer, id_cliente integer)";
         db.execSQL(createTablePedidos);
     }
 
