@@ -2,6 +2,7 @@ package com.example.almaceneskikoandroid.Ventanas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,9 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.almaceneskikoandroid.R;
+import com.example.almaceneskikoandroid.functions.Funciones;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -26,19 +27,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
 
-    TextView txtTitleMap;
     private String nombreCliente, urlIr, calle, ciudad;
     private int num, cp;
 
     private double latitud, longitud;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        txtTitleMap = findViewById(R.id.txtTitleMap);
+        Toolbar toolbarMap = findViewById(R.id.toolbarMap);
+        addBackButtonInToolbar(toolbarMap, MapsActivity.this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -46,8 +46,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Se recogerá de la base de datos
         nombreCliente = "Bar Manolo";
 
-        //Text titulo del map, "Ubicación de : " + nombreCliente
-        txtTitleMap.setText(getString(R.string.ubicaci_n_de) + nombreCliente);
+        setSupportActionBar(toolbarMap);
+        getSupportActionBar().setTitle("Ubicacion de: " + nombreCliente);
 
         //Se recogerá de la base de datos
         calle = "Mirabel";
@@ -78,6 +78,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mMap.addMarker(new MarkerOptions().position(mapClient).title(nombreCliente));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mapClient));
+
+    }
+
+    public void addBackButtonInToolbar(Toolbar toolbar, AppCompatActivity appCompatActivity){
+
+        appCompatActivity.setSupportActionBar(toolbar);
+        if(appCompatActivity.getSupportActionBar() != null){
+            appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapsActivity.this, SignIn.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

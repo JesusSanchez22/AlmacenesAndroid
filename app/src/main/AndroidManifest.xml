@@ -13,11 +13,16 @@
         android:theme="@style/Theme.AlmacenesKikoAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".Ventanas.AgregarPedido"
+            android:exported="false" />
+        <activity
             android:name=".Ventanas.ProfileActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCjD4BTQyoqRUs0jSs4zpLfAZs6XUtMO30" />
+
         <activity
             android:name=".Ventanas.MapsActivity"
             android:exported="false" />
@@ -25,8 +30,8 @@
             android:name=".Ventanas.SignIn"
             android:exported="false" />
         <activity
-            android:name=".Ventanas.login"
-            android:exported="false"/>
+            android:name=".Ventanas.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".Ventanas.DetallesProductosActivity"
             android:exported="false" />
@@ -45,7 +50,7 @@
             android:name=".Ventanas.ProductosActivity"
             android:exported="false" />
         <activity
-            android:name=".Ventanas.MainActivity"
+            android:name=".Ventanas.login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

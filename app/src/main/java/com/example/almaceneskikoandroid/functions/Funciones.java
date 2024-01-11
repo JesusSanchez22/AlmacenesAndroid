@@ -2,9 +2,14 @@ package com.example.almaceneskikoandroid.functions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.example.almaceneskikoandroid.Ventanas.DetallesPedidos;
+import com.example.almaceneskikoandroid.Ventanas.MainActivity;
 
 public class Funciones extends AppCompatActivity {
 
@@ -14,9 +19,9 @@ public class Funciones extends AppCompatActivity {
 
         notificacion.show();
     }
-    public void mostrarToastLargo(String texto){
+    public static void mostrarToastLargo(Context context, String texto){
 
-        Toast notificacion = Toast.makeText(this, texto, Toast.LENGTH_LONG);
+        Toast notificacion = Toast.makeText(context, texto, Toast.LENGTH_LONG);
 
         notificacion.show();
     }
@@ -25,6 +30,25 @@ public class Funciones extends AppCompatActivity {
         Intent intent = new Intent(context, c);
         startActivity(intent);
     }*/
+
+    public void addBackButtonInToolbar(Toolbar toolbar, AppCompatActivity appCompatActivity, Context context){
+
+        appCompatActivity.setSupportActionBar(toolbar);
+        if(appCompatActivity.getSupportActionBar() != null){
+            appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
 
 
 }

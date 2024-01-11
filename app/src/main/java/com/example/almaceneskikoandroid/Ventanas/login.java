@@ -57,8 +57,6 @@ public class login extends AppCompatActivity {
 
     public void verificar(View v){
 
-        Intent i = new Intent(this, MapsActivity.class);
-
         String usuarioIn = etUserLogin.getText().toString();
         String contrasenaIn = etPasswordLogin.getText().toString();
 
@@ -67,13 +65,15 @@ public class login extends AppCompatActivity {
         } else if ((contrasenaIn.isEmpty())) {
             Funciones.mostrarToastCorto(this,"La contraseña no puede estar vacía");
         } else if (usuarioIn.equals(user1) && contrasenaIn.equals(passwordUser1)){
-            Funciones.mostrarToastCorto(this,"Contraseña correcta user1");
+
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
-            //cambiarActivity(.class);
+
         } else if (usuarioIn.equals(user2) && contrasenaIn.equals(passwordUser2)){
-            Funciones.mostrarToastCorto(this,"Contraseña correcta user2");
+
+            Intent i = new Intent(this, MapsActivity.class);
             startActivity(i);
-            //cambiarActivity(.class);
+
         } else {
             Funciones.mostrarToastCorto(this, "Usuario o Contraseña Incorrectos");
         }
