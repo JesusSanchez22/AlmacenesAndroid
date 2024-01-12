@@ -49,62 +49,6 @@ public class MiDBHelper extends SQLiteOpenHelper {
         db.execSQL(createTableUsuarios);
 
 
-        //Inserción de productos
-
-        //Producto 1
-        ContentValues valoresProducto1 = new ContentValues();
-        valoresProducto1.put("nombre", "Vino Tinto Reserva");
-        valoresProducto1.put("descripcion", "Vino tinto de alta calidad");
-        valoresProducto1.put("precio", 19.99);
-
-        db.insert("productos", null, valoresProducto1);
-
-        //Producto 2
-        ContentValues valoresProducto2 = new ContentValues();
-        valoresProducto2.put("nombre", "Vino Blanco Especial");
-        valoresProducto2.put("descripcion", "Vino blanco de cosecha especial");
-        valoresProducto2.put("precio", 24.99);
-
-
-        // Inserción de cliente
-        // Cliente 1
-        ContentValues valoresCliente1 = new ContentValues();
-        valoresCliente1.put("nombre_fiscal", "Bodegas Vinícolas S.A.");
-        valoresCliente1.put("nombre_empresa", "Vinícolas");
-        valoresCliente1.put("calle", "Mirabel");
-        valoresCliente1.put("numero", 25);
-        valoresCliente1.put("cp", 47001);
-        valoresCliente1.put("ciudad", "Valladolid");
-
-        db.insert("clientes", null, valoresCliente1);
-
-        // Cliente 2
-        ContentValues valoresCliente2 = new ContentValues();
-        valoresCliente2.put("nombre_fiscal", "Bodega Elegante S.L.");
-        valoresCliente2.put("nombre_empresa", "Vinos Elegantes");
-        valoresCliente2.put("calle", "Cerrada");
-        valoresCliente2.put("numero", 4);
-        valoresCliente2.put("cp", 47002);
-        valoresCliente2.put("ciudad", "Valladolid");
-
-        db.insert("clientes", null, valoresCliente2);
-
-        // Pedido 1
-        ContentValues valoresPedido = new ContentValues();
-        valoresPedido.put("id_producto", 1);
-        valoresPedido.put("cantidad", 2);
-        valoresPedido.put("id_cliente", 1);
-
-        db.insert("pedidos", null, valoresPedido);
-
-        // Pedido 2
-        ContentValues valoresPedido2 = new ContentValues();
-        valoresPedido2.put("id_producto", 2);
-        valoresPedido2.put("cantidad", 10);
-        valoresPedido2.put("id_cliente", 2);
-
-        db.insert("pedidos", null, valoresPedido2);
-
         //Usuario 1 (jesus) de cliente 1
         ContentValues valoresUsuario = new ContentValues();
         valoresUsuario.put("id_usuario", "jesusm");
@@ -497,5 +441,31 @@ public class MiDBHelper extends SQLiteOpenHelper {
         db.close();
         return cliente;
     }
+
+    public Producto obtenerProductoPorNombre(String nombreBuscar) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM productos WHERE nombre = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{nombreBuscar});
+
+        Producto producto = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id_producto"));
+            @SuppressLint("Range") String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+            @SuppressLint("Range") double precio = Double.parseDouble(cursor.getString(cursor.getColumnIndex("precio")));
+            @SuppressLint("Range") int cantidad = Integer.parseInt(cursor.getString(cursor.getColumnIndex("cantidad")));
+            @SuppressLint("Range") String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+            @SuppressLint("Range") byte[] imagen = cursor.getBlob(cursor.getColumnIndex("imagen"));
+
+            producto = new Producto(id, nombre, precio, cantidad, descripcion, imagen);
+            cursor.close();
+        }
+
+        db.close();
+        return producto;
+    }
+
+
 
 }

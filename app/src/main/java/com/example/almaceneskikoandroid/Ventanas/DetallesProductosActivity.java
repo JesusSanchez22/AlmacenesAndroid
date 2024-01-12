@@ -46,7 +46,7 @@ public class DetallesProductosActivity extends AppCompatActivity {
         EditText etID_Detalles = findViewById(R.id.etID_Detalles);
         EditText etNombre_Detalles = findViewById(R.id.etNombre_Detalles);
         EditText etPrecio_Detalles = findViewById(R.id.etPrecio_Detalles);
-        //EditText etCantidad_Detalles = findViewById(R.id.etCantidad_Detalles);
+        EditText etCantidad_Detalles = findViewById(R.id.etCantidad_Detalles);
         EditText etDescripcion_Detalles = findViewById(R.id.etDescripcion_Detalles);
         ImageView imageView = findViewById(R.id.imageView);
 
@@ -55,7 +55,7 @@ public class DetallesProductosActivity extends AppCompatActivity {
         etID_Detalles.setText(String.valueOf(productoSeleccionado.getId_producto()));
         etNombre_Detalles.setText(productoSeleccionado.getNombre());
         etPrecio_Detalles.setText(String.valueOf(productoSeleccionado.getPrecio()));
-        //etCantidad_Detalles.setText(String.valueOf(productoSeleccionado.getCantidad()));
+        etCantidad_Detalles.setText(String.valueOf(productoSeleccionado.getCantidad()));
         etDescripcion_Detalles.setText(productoSeleccionado.getDescripcion());
 
         if (productoSeleccionado.getImagen() != null && productoSeleccionado.getImagen().length > 0) {

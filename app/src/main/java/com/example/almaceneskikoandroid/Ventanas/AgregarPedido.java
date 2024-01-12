@@ -11,24 +11,30 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.almaceneskikoandroid.MiDBHelper;
+import com.example.almaceneskikoandroid.Producto;
 import com.example.almaceneskikoandroid.R;
 import com.example.almaceneskikoandroid.functions.Funciones;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AgregarPedido extends AppCompatActivity {
 
-    EditText etIdProductoPedido, etCantidadPedido, etIdCliente;
+    EditText etCantidadPedido, etIdCliente;
     TextView tvIdCliente;
     Button btnAgregarPedido;
 
     private int id_cliente;
 
-    private MiDBHelper dbHelper;
+    MiDBHelper miDBHelper;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -38,9 +44,8 @@ public class AgregarPedido extends AppCompatActivity {
 
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.sonido);
 
-        dbHelper = new MiDBHelper(this);
+        miDBHelper = new MiDBHelper(this);
 
-        etIdProductoPedido = findViewById(R.id.etIdProductoPedido);
         etCantidadPedido = findViewById(R.id.etCantidadPedido);
         etIdCliente = findViewById(R.id.etIdCliente);
         tvIdCliente = findViewById(R.id.tvIdCliente);
@@ -55,13 +60,29 @@ public class AgregarPedido extends AppCompatActivity {
             id_cliente = usuarioLogIn.getIdCliente();
         }
 
+        Spinner spinner = findViewById(R.id.spinnerProducto);
+
+        List<Producto> spinnerProducto = miDBHelper.obtenerDatosProductos();
+        List<String> spinnerStrings = new ArrayList<>();
+
+        for (Producto producto : spinnerProducto) {
+            spinnerStrings.add(producto.toString());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerStrings);
+
+        spinner.setAdapter(adapter);
+
         btnAgregarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(AgregarPedido.this, "Pedido agregado correctamente", Toast.LENGTH_SHORT).show();
 
-                String id_producto_string = String.valueOf(etIdProductoPedido.getText());
+                String nombre_producto_string = spinner.getSelectedItem().toString();
                 String cantidad_string = String.valueOf(etCantidadPedido.getText());
+
+                Producto producto = miDBHelper.obtenerProductoPorNombre(nombre_producto_string);
+                int id_producto_añadir = producto.getId_producto();
 
                 if (usuarioLogIn.isEmpleado()) {
                     try {
@@ -71,10 +92,9 @@ public class AgregarPedido extends AppCompatActivity {
                     }
                 }
 
-                int id_producto = Integer.parseInt(id_producto_string);
                 int cantidad = Integer.parseInt(cantidad_string);
 
-                dbHelper.insertarPedidos(id_producto, cantidad, id_cliente);
+                miDBHelper.insertarPedidos(id_producto_añadir, cantidad, id_cliente);
 
                 mediaPlayer.start();
 

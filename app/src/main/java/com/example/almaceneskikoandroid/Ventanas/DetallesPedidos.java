@@ -46,15 +46,18 @@ public class DetallesPedidos extends AppCompatActivity {
             buttonCompletado.setVisibility(View.INVISIBLE);
         }
 
-        //Asigna objeto cliente dependiendo del pedido
-        clientePedido = miDBHelper.obtenerCliente(pedidoSeleccionado.getId_cliente());
 
-        TableLayout tableLayout = findViewById(R.id.tableLayout);
+        if(pedidoSeleccionado != null){
 
-        TextView idPedidoTV = findViewById(R.id.id_pedidoVacio);
-        TextView idClienteTV = findViewById(R.id.id_clienteVacio);
-        TextView idProductoTV = findViewById(R.id.id_productoVacio);
-        TextView cantidadTV = findViewById(R.id.cantidadVacio);
+
+            clientePedido = miDBHelper.obtenerCliente(pedidoSeleccionado.getId_cliente());
+
+            TableLayout tableLayout = findViewById(R.id.tableLayout);
+
+            TextView idPedidoTV = findViewById(R.id.id_pedidoVacio);
+            TextView idClienteTV = findViewById(R.id.id_clienteVacio);
+            TextView idProductoTV = findViewById(R.id.id_productoVacio);
+            TextView cantidadTV = findViewById(R.id.cantidadVacio);
 
 
 
@@ -80,27 +83,32 @@ public class DetallesPedidos extends AppCompatActivity {
 
 
 
-        buttonMapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DetallesPedidos.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+            buttonMapa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DetallesPedidos.this, MapsActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-        buttonCompletado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            buttonCompletado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                miDBHelper.eliminarPedido(pedidoSeleccionado.getId_pedido());
+                    miDBHelper.eliminarPedido(pedidoSeleccionado.getId_pedido());
 
-                Toast.makeText(DetallesPedidos.this, "Pedido completado con éxito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetallesPedidos.this, "Pedido completado con éxito", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(DetallesPedidos.this, MainActivity.class);
-                startActivity(intent);
+                    Intent intent = new Intent(DetallesPedidos.this, MainActivity.class);
+                    startActivity(intent);
 
-            }
-        });
+                }
+            });
+
+        }else{
+            Toast.makeText(this, "asdas", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
