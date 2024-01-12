@@ -1,6 +1,7 @@
 package com.example.almaceneskikoandroid.Ventanas;
 
 import static com.example.almaceneskikoandroid.Ventanas.MainActivity.pedidoSeleccionado;
+import static com.example.almaceneskikoandroid.Ventanas.login.usuarioLogIn;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,14 +17,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.almaceneskikoandroid.Cliente;
 import com.example.almaceneskikoandroid.MiDBHelper;
-import com.example.almaceneskikoandroid.Pedido;
 import com.example.almaceneskikoandroid.R;
 
-import java.util.List;
 
 public class DetallesPedidos extends AppCompatActivity {
 
+    public static Cliente clientePedido;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -40,6 +41,13 @@ public class DetallesPedidos extends AppCompatActivity {
         Button buttonMapa = findViewById(R.id.buttonMap);
         Button buttonCompletado = findViewById(R.id.buttonCompletado);
 
+        if (!usuarioLogIn.isEmpleado()){
+            buttonMapa.setVisibility(View.INVISIBLE);
+            buttonCompletado.setVisibility(View.INVISIBLE);
+        }
+
+        //Asigna objeto cliente dependiendo del pedido
+        clientePedido = miDBHelper.obtenerCliente(pedidoSeleccionado.getId_cliente());
 
         TableLayout tableLayout = findViewById(R.id.tableLayout);
 
@@ -108,8 +116,13 @@ public class DetallesPedidos extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetallesPedidos.this, MainActivity.class);
-                startActivity(intent);
+                if (usuarioLogIn.isEmpleado()){
+                    Intent i = new Intent(DetallesPedidos.this, MainActivity.class);
+                    startActivity(i);
+                } else{
+                    Intent i = new Intent(DetallesPedidos.this, MainClientesActivity.class);
+                    startActivity(i);
+                }
             }
         });
 

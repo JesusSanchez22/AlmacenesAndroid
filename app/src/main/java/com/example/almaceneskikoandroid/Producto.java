@@ -5,7 +5,7 @@ public class Producto {
     private int id_producto;
     private String nombre;
     private double precio;
-    private int cantidad;
+    private int cantidad = 0;
     private String descripcion;
 
     private byte[] imagen;

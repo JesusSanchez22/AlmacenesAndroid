@@ -2,10 +2,7 @@ package com.example.almaceneskikoandroid.Ventanas;
 
 import static com.example.almaceneskikoandroid.Ventanas.login.usuarioLogIn;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.almaceneskikoandroid.MiDBHelper;
 import com.example.almaceneskikoandroid.Pedido;
 import com.example.almaceneskikoandroid.R;
@@ -23,9 +24,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainClientesActivity extends AppCompatActivity {
 
-    protected static Pedido pedidoSeleccionado;
+    public static Pedido pedidoSeleccionado;
 
     private FloatingActionButton flActionButton;
 
@@ -35,40 +36,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_cliente);
 
         flActionButton = findViewById(R.id.floatingActionButtonPedidosCliente);
 
         flActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AgregarPedido.class);
+                Intent intent = new Intent(MainClientesActivity.this, AgregarPedido.class);
                 startActivity(intent);
             }
         });
 
-        Toolbar toolbarMain = findViewById(R.id.toolbarInicio);
+        Toolbar toolbarMainClientes = findViewById(R.id.toolbarInicio);
 
-        setSupportActionBar(toolbarMain);
+        setSupportActionBar(toolbarMainClientes);
         getSupportActionBar().setTitle("Inicio  |   " + usuarioLogIn.getIdUsuario());
 
         miDBHelper = new MiDBHelper(this);
 
-        ListView lista = findViewById(R.id.listaNotificacionesCliente);
+        ListView listaCliente = findViewById(R.id.listaNotificacionesCliente);
 
-        List<Pedido> datosPedidos = miDBHelper.obtenerDatosPedidos();
+        List<Pedido> datosPedidos = miDBHelper.obtenerDatosPedidosUsuario(usuarioLogIn.getIdUsuario());
 
         ArrayAdapter<Pedido> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, datosPedidos);
 
-        lista.setAdapter(adapter);
+        listaCliente.setAdapter(adapter);
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listaCliente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, DetallesPedidos.class);
+                Intent intent = new Intent(MainClientesActivity.this, DetallesPedidos.class);
                 startActivity(intent);
 
-                pedidoSeleccionado = (Pedido) lista.getItemAtPosition(position);
+                pedidoSeleccionado = (Pedido) listaCliente.getItemAtPosition(position);
 
             }
         });
@@ -84,13 +85,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
+
         if(id==R.id.opcionProductos){
-            Intent intent = new Intent(MainActivity.this, ProductosActivity.class);
+            Intent intent = new Intent(MainClientesActivity.this, ProductosActivity.class);
             startActivity(intent);
         }
 
         if(id==R.id.opcionClientes){
-            Intent intent = new Intent(MainActivity.this, ClientesActivity.class);
+            Intent intent = new Intent(MainClientesActivity.this, ClientesActivity.class);
             startActivity(intent);
         }
 

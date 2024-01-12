@@ -1,8 +1,10 @@
 package com.example.almaceneskikoandroid.Ventanas;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -10,35 +12,38 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.almaceneskikoandroid.MiDBHelper;
 import com.example.almaceneskikoandroid.R;
+import com.example.almaceneskikoandroid.Usuario;
 import com.example.almaceneskikoandroid.functions.Funciones;
 
 
 
 public class login extends AppCompatActivity {
 
+    protected static Usuario usuarioLogIn;
     private CheckBox checkBox;
     private EditText etUserLogin, etPasswordLogin;
     private TextView txtRegistro;
 
     //Perfil 1
-    private String user1 = "raul";
+    private String user1 = "jesusm";
     private String passwordUser1 = "123";
 
-    //Perfil 2
-    private String user2 = "jesus";
-    private String passwordUser2 = "123";
+    MiDBHelper dbHelper;
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        dbHelper = new MiDBHelper(this);
+
         etUserLogin = findViewById(R.id.etUserLogin);
         etPasswordLogin = findViewById(R.id.etPasswordLogin);
 
         checkBox = findViewById(R.id.checkBox);
-
         checkBox.setChecked(false);
 
         etUserLogin.setText(user1);
@@ -64,18 +69,20 @@ public class login extends AppCompatActivity {
         String contrasenaIn = etPasswordLogin.getText().toString();
 
         if (usuarioIn.isEmpty()) {
-            Funciones.mostrarToastCorto(this,"No has metido ningún usuario");
+            Funciones.mostrarToastCorto(this,"No has introducido ningún usuario");
         } else if ((contrasenaIn.isEmpty())) {
             Funciones.mostrarToastCorto(this,"La contraseña no puede estar vacía");
-        } else if (usuarioIn.equals(user1) && contrasenaIn.equals(passwordUser1)){
+        } else if (dbHelper.existeUsuario(usuarioIn) && dbHelper.comprobarContrasena(usuarioIn, contrasenaIn)){
 
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+            usuarioLogIn = dbHelper.obtenerUsuario(usuarioIn);
 
-        } else if (usuarioIn.equals(user2) && contrasenaIn.equals(passwordUser2)){
-
-            Intent i = new Intent(this, MapsActivity.class);
-            startActivity(i);
+            if (usuarioLogIn.isEmpleado()){
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+            } else{
+                Intent i = new Intent(this, MainClientesActivity.class);
+                startActivity(i);
+            }
 
         } else {
             Funciones.mostrarToastCorto(this, "Usuario o Contraseña Incorrectos");

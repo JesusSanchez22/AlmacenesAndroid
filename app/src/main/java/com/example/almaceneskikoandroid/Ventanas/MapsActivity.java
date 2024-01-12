@@ -1,19 +1,20 @@
 package com.example.almaceneskikoandroid.Ventanas;
 
+import static com.example.almaceneskikoandroid.Ventanas.DetallesPedidos.clientePedido;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.almaceneskikoandroid.R;
-import com.example.almaceneskikoandroid.functions.Funciones;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -21,7 +22,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.net.URL;
+import java.io.IOException;
+import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -30,7 +32,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String nombreCliente, urlIr, calle, ciudad;
     private int num, cp;
 
-    private double latitud, longitud;
+    //private double latitud, longitud;
+
+    LatLng latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,23 +47,33 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
         //Se recogerá de la base de datos
-        nombreCliente = "Bar Manolo";
+        nombreCliente = clientePedido.getNombreEmpresa();
 
         setSupportActionBar(toolbarMap);
         getSupportActionBar().setTitle("Ubicacion de: " + nombreCliente);
 
         //Se recogerá de la base de datos
-        calle = "Mirabel";
-        num = 25;
-        cp = 47010;
-        ciudad = "Valladolid";
+        calle = clientePedido.getCalle();
+        num = clientePedido.getNumero();
+        cp = clientePedido.getCp();
+        ciudad = clientePedido.getCiudad();
 
+        //url para ir desde el botón
         urlIr = "https://www.google.es/maps/dir//" + calle + ",+" + num + ",+" + cp + "+" + ciudad + "/";
 
-        //Se recogerá de la base de datos
-        latitud = 41.664665;
-        longitud = -4.722739;
+        //Permite buscar por nombre en el mapa
+        Geocoder geo = new Geocoder(this);
+        int maxResultados = 1;
+        List<Address> adress = null;
+        try {
+            adress = geo.getFromLocationName("Calle " + calle + " " + num + ", " + ciudad, maxResultados);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        latLng = new LatLng(adress.get(0).getLatitude(), adress.get(0).getLongitude());
 
     }
 
@@ -74,10 +88,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mMap = googleMap;
 
-        LatLng mapClient = new LatLng(latitud, longitud);
+        //LatLng mapClient = new LatLng(latitud, longitud);
 
-        mMap.addMarker(new MarkerOptions().position(mapClient).title(nombreCliente));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mapClient));
+        mMap.addMarker(new MarkerOptions().position(latLng).title(nombreCliente));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
     }
 
@@ -93,7 +107,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapsActivity.this, SignIn.class);
+                Intent intent = new Intent(MapsActivity.this, DetallesPedidos.class);
                 startActivity(intent);
             }
         });

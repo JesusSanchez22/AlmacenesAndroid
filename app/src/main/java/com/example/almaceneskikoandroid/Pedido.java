@@ -57,6 +57,6 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "" + id_pedido;
+        return "Código: " + id_pedido;
     }
 }

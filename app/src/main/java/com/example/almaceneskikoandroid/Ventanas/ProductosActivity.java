@@ -22,7 +22,7 @@ import java.util.List;
 public class ProductosActivity extends AppCompatActivity {
 
 
-    public static Producto productoSeleccionado;
+    protected static Producto productoSeleccionado;
     MiDBHelper miDBHelper;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -64,7 +64,6 @@ public class ProductosActivity extends AppCompatActivity {
                 startActivity(intent);
 
                 productoSeleccionado = (Producto)lista.getItemAtPosition(position);
-
 
             }
         });

@@ -1,7 +1,7 @@
 package com.example.almaceneskikoandroid;
 
 public class Usuario {
-    private int idUsuario;
+    private String idUsuario;
     private String contrasena;
     private boolean isEmpleado;
     private int idCliente;
@@ -11,7 +11,7 @@ public class Usuario {
         // Constructor por defecto
     }
 
-    public Usuario(int idUsuario, String contrasena, boolean isEmpleado, int idCliente) {
+    public Usuario(String idUsuario, String contrasena, boolean isEmpleado, int idCliente) {
         this.idUsuario = idUsuario;
         this.contrasena = contrasena;
         this.isEmpleado = isEmpleado;
@@ -19,11 +19,11 @@ public class Usuario {
     }
 
     // Getters y Setters
-    public int getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 

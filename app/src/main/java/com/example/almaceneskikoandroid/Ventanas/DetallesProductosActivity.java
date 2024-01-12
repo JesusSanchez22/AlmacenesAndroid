@@ -1,5 +1,6 @@
 package com.example.almaceneskikoandroid.Ventanas;
 
+import static androidx.fragment.app.FragmentManager.TAG;
 import static com.example.almaceneskikoandroid.Ventanas.ProductosActivity.productoSeleccionado;
 
 import androidx.annotation.RequiresApi;
@@ -45,7 +46,7 @@ public class DetallesProductosActivity extends AppCompatActivity {
         EditText etID_Detalles = findViewById(R.id.etID_Detalles);
         EditText etNombre_Detalles = findViewById(R.id.etNombre_Detalles);
         EditText etPrecio_Detalles = findViewById(R.id.etPrecio_Detalles);
-        EditText etCantidad_Detalles = findViewById(R.id.etCantidad_Detalles);
+        //EditText etCantidad_Detalles = findViewById(R.id.etCantidad_Detalles);
         EditText etDescripcion_Detalles = findViewById(R.id.etDescripcion_Detalles);
         ImageView imageView = findViewById(R.id.imageView);
 
@@ -57,10 +58,12 @@ public class DetallesProductosActivity extends AppCompatActivity {
         //etCantidad_Detalles.setText(String.valueOf(productoSeleccionado.getCantidad()));
         etDescripcion_Detalles.setText(productoSeleccionado.getDescripcion());
 
+        if (productoSeleccionado.getImagen() != null && productoSeleccionado.getImagen().length > 0) {
 
-        Bitmap bitmap = BitmapFactory.decodeByteArray(productoSeleccionado.getImagen(), 0, productoSeleccionado.getImagen().length);
-        imageView.setImageBitmap(bitmap);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(productoSeleccionado.getImagen(), 0, productoSeleccionado.getImagen().length);
+            imageView.setImageBitmap(bitmap);
 
+        }
 
         buttonModificar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +72,11 @@ public class DetallesProductosActivity extends AppCompatActivity {
                 int id = Integer.parseInt(String.valueOf(etID_Detalles.getText()));
                 String nombre = String.valueOf(etNombre_Detalles.getText());
                 double precio = Double.parseDouble(String.valueOf(etPrecio_Detalles.getText()));
-                int cantidad = Integer.parseInt(String.valueOf(etCantidad_Detalles.getText()));
+                //int cantidad = Integer.parseInt(String.valueOf(etCantidad_Detalles.getText()));
                 String descripcion = String.valueOf(etDescripcion_Detalles.getText());
                 //byte[] imagen = imageView.
 
-                miDBHelper.modificarProducto(id, nombre, precio, cantidad, descripcion, productoSeleccionado.getImagen());
+                miDBHelper.modificarProducto(id, nombre, precio, descripcion, productoSeleccionado.getImagen());
 
             }
         });
