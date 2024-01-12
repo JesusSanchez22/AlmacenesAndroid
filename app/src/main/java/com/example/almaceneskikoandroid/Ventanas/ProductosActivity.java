@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ProductosActivity extends AppCompatActivity {
 
-
+    //variables
     protected static Producto productoSeleccionado;
     MiDBHelper miDBHelper;
 
@@ -33,10 +33,11 @@ public class ProductosActivity extends AppCompatActivity {
 
         miDBHelper = new MiDBHelper(this);
 
+        //configuramos el toolbar
         setSupportActionBar(findViewById(R.id.toolbar2));
         getSupportActionBar().setTitle("Productos");
 
-
+        //creamos un floating button en el que al hacer click te llevará a la ventana de agregar producto
         FloatingActionButton fbAgregar = findViewById(R.id.fbAgregar);
 
         fbAgregar.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +48,7 @@ public class ProductosActivity extends AppCompatActivity {
             }
         });
 
-
+        //creamos una lista y le añadimos los datos de los productos
         ListView lista = findViewById(R.id.ListView);
 
         List<Producto> datosProductos = miDBHelper.obtenerDatosProductos();
@@ -56,6 +57,8 @@ public class ProductosActivity extends AppCompatActivity {
 
         lista.setAdapter(adapter);
 
+        //haremos que al clickar en alguno de los registros de la lista, se guarde dicho producto en una variable,
+        // y nos lleve a DetallesProductosActivity
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -76,6 +79,7 @@ public class ProductosActivity extends AppCompatActivity {
     }
 
 
+    //metodo para poner un boton para volver atrás en el toolbar
     public void addBackButtonInToolbar(Toolbar toolbar, AppCompatActivity appCompatActivity){
 
         appCompatActivity.setSupportActionBar(toolbar);

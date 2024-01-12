@@ -85,14 +85,6 @@ public class Cliente {
     // toString() para depuración
     @Override
     public String toString() {
-        return "Cliente{" +
-                "idCliente=" + idCliente +
-                ", nombreFiscal='" + nombreFiscal + '\'' +
-                ", nombreEmpresa='" + nombreEmpresa + '\'' +
-                ", calle='" + calle + '\'' +
-                ", numero=" + numero +
-                ", cp=" + cp +
-                ", ciudad='" + ciudad + '\'' +
-                '}';
+        return "" + nombreFiscal;
     }
 }

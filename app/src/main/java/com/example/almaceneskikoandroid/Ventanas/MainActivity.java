@@ -25,12 +25,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    //variables que vamos a utilizar
     protected static Pedido pedidoSeleccionado;
 
     private FloatingActionButton flActionButton;
 
     MiDBHelper miDBHelper;
 
+    //metodo onCreate que se ejecutará cuando se inicie la App
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         flActionButton = findViewById(R.id.floatingActionButtonPedidosCliente);
 
+        //metodo que nos llevará a la pantalla de agregar pedidos cuando pulsemos el boton flotante
         flActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,13 +50,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //configuración del toolbar
         Toolbar toolbarMain = findViewById(R.id.toolbarInicio);
 
         setSupportActionBar(toolbarMain);
+
+        //codigo para que salga "Inicio NombreUsuario" en el toolbar
         getSupportActionBar().setTitle("Inicio  |   " + usuarioLogIn.getIdUsuario());
 
         miDBHelper = new MiDBHelper(this);
 
+        //creamos una lista y le añadimos los datos de los pedidos
         ListView lista = findViewById(R.id.listaNotificacionesCliente);
 
         List<Pedido> datosPedidos = miDBHelper.obtenerDatosPedidos();
@@ -62,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         lista.setAdapter(adapter);
 
+        //metodo para que al pulsar en uno de los registros de la lista, nos lleve a la ventana de detalles pedidos
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,12 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //metodo para crear el menu de opciones en el toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menuopciones,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    //metodo para que al pulsar en una de las opciones, nos cambie de pestaña
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();

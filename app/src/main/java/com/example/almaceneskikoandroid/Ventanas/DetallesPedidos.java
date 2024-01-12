@@ -24,7 +24,9 @@ import com.example.almaceneskikoandroid.R;
 
 public class DetallesPedidos extends AppCompatActivity {
 
+    //variables
     public static Cliente clientePedido;
+
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -36,22 +38,26 @@ public class DetallesPedidos extends AppCompatActivity {
 
         Toolbar toolbar2 = findViewById(R.id.toolbar2);
 
+        //boton para volver a la ventana anterior en el toolbar
         addBackButtonInToolbar(toolbar2, DetallesPedidos.this);
 
         Button buttonMapa = findViewById(R.id.buttonMap);
         Button buttonCompletado = findViewById(R.id.buttonCompletado);
 
+        //creamos un if para que si no somos empleados, no nos salgan los botones ni de mapa ni el boton completado
         if (!usuarioLogIn.isEmpleado()){
             buttonMapa.setVisibility(View.INVISIBLE);
             buttonCompletado.setVisibility(View.INVISIBLE);
         }
 
-
+        //if para asegurarnos de que el pedido en el que hemos clickado no sea nulo
         if(pedidoSeleccionado != null){
 
-
+            //obtenemos el cliente dado el id, y lo almacenamos en una variable
             clientePedido = miDBHelper.obtenerCliente(pedidoSeleccionado.getId_cliente());
 
+
+            //creamos un tablelayout para visualizar los datos del pedido
             TableLayout tableLayout = findViewById(R.id.tableLayout);
 
             TextView idPedidoTV = findViewById(R.id.id_pedidoVacio);
@@ -59,30 +65,19 @@ public class DetallesPedidos extends AppCompatActivity {
             TextView idProductoTV = findViewById(R.id.id_productoVacio);
             TextView cantidadTV = findViewById(R.id.cantidadVacio);
 
-
-
             TableRow row = new TableRow(this);
-
 
             idPedidoTV.setText(String.valueOf(pedidoSeleccionado.getId_pedido()));
 
-
-
             idClienteTV.setText(String.valueOf(pedidoSeleccionado.getId_cliente()));
-
-
 
             idProductoTV.setText(String.valueOf(pedidoSeleccionado.getId_producto()));
 
-
-
             cantidadTV.setText(String.valueOf(pedidoSeleccionado.getCantidad()));
-
 
             tableLayout.addView(row);
 
-
-
+            //el boton mapa nos llevara a la ventana de mapas
             buttonMapa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,6 +86,7 @@ public class DetallesPedidos extends AppCompatActivity {
                 }
             });
 
+            //el boton completado nos eliminará el pedido en la lista de pedidos pendientes
             buttonCompletado.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -112,6 +108,7 @@ public class DetallesPedidos extends AppCompatActivity {
 
     }
 
+    //hacemos los distintos botones del toolbar
     public void addBackButtonInToolbar(Toolbar toolbar, AppCompatActivity appCompatActivity){
 
         appCompatActivity.setSupportActionBar(toolbar);

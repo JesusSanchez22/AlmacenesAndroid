@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -32,8 +31,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String nombreCliente, urlIr, calle, ciudad;
     private int num, cp;
 
-    //private double latitud, longitud;
-
     LatLng latLng;
 
     @Override
@@ -41,29 +38,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        // Obtener referencia a la barra de herramientas
         Toolbar toolbarMap = findViewById(R.id.toolbarMap);
+        // Agregar botón de retroceso a la barra de herramientas
         addBackButtonInToolbar(toolbarMap, MapsActivity.this);
 
+        // Obtener referencia al fragmento del mapa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
-        //Se recogerá de la base de datos
+        // Recoger datos del cliente desde la base de datos
         nombreCliente = clientePedido.getNombreEmpresa();
 
-        setSupportActionBar(toolbarMap);
-        getSupportActionBar().setTitle("Ubicacion de: " + nombreCliente);
-
-        //Se recogerá de la base de datos
+        // Recoger datos del cliente desde la base de datos
         calle = clientePedido.getCalle();
         num = clientePedido.getNumero();
         cp = clientePedido.getCp();
         ciudad = clientePedido.getCiudad();
 
-        //url para ir desde el botón
+        // URL para abrir Google Maps y navegar a la ubicación del cliente
         urlIr = "https://www.google.es/maps/dir//" + calle + ",+" + num + ",+" + cp + "+" + ciudad + "/";
 
-        //Permite buscar por nombre en el mapa
+        // Usar Geocoder para obtener la ubicación del cliente por su dirección
         Geocoder geo = new Geocoder(this);
         int maxResultados = 1;
         List<Address> adress = null;
@@ -73,44 +69,42 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             throw new RuntimeException(e);
         }
 
+        // Crear LatLng con la ubicación obtenida del Geocoder
         latLng = new LatLng(adress.get(0).getLatitude(), adress.get(0).getLongitude());
-
     }
 
+    // Método para abrir Google Maps y navegar a la ubicación del cliente
     public void irUbicacion(View v){
         Uri link = Uri.parse(urlIr);
         Intent i = new Intent(Intent.ACTION_VIEW, link);
         startActivity(i);
     }
 
+    // Método llamado cuando el mapa está listo para ser utilizado
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-
         mMap = googleMap;
 
-        //LatLng mapClient = new LatLng(latitud, longitud);
-
+        // Añadir un marcador en la ubicación del cliente y mover la cámara
         mMap.addMarker(new MarkerOptions().position(latLng).title(nombreCliente));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
     }
 
+    // Método para agregar un botón de retroceso a la barra de herramientas
     public void addBackButtonInToolbar(Toolbar toolbar, AppCompatActivity appCompatActivity){
-
         appCompatActivity.setSupportActionBar(toolbar);
         if(appCompatActivity.getSupportActionBar() != null){
             appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         }
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Ir a la actividad DetallesPedidos al hacer clic en el botón de retroceso
                 Intent intent = new Intent(appCompatActivity, DetallesPedidos.class);
                 startActivity(intent);
             }
         });
-
     }
 }

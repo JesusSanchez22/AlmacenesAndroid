@@ -35,16 +35,17 @@ public class DetallesProductosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_productos);
 
+        //creamos y configuramos el toolbar
         setSupportActionBar(findViewById(R.id.toolbarDetallesProductos));
         getSupportActionBar().setTitle("Detalle del producto");
 
         Toolbar toolbar = findViewById(R.id.toolbarDetallesProductos);
         addBackButtonInToolbar(toolbar, DetallesProductosActivity.this);
 
+        //metemos en una variable cada uno de los elementos del xml
         Button buttonModificar = findViewById(R.id.buttonModificar);
         Button buttonEliminar = findViewById(R.id.buttonEliminar);
 
-        //EditText etID_Detalles = findViewById(R.id.etID_Detalles);
         TextView tvId_Producto = findViewById(R.id.tvId_Producto);
         EditText etNombre_Detalles = findViewById(R.id.etNombre_Detalles);
         EditText etPrecio_Detalles = findViewById(R.id.etPrecio_Detalles);
@@ -54,13 +55,14 @@ public class DetallesProductosActivity extends AppCompatActivity {
 
         MiDBHelper miDBHelper = new MiDBHelper(this);
 
-        //etID_Detalles.setText(String.valueOf(productoSeleccionado.getId_producto()));
+        //rellenamos los elementos con los datos del producto elegido
         tvId_Producto.setText("Id del producto: " + String.valueOf(productoSeleccionado.getId_producto()));
         etNombre_Detalles.setText(productoSeleccionado.getNombre());
         etPrecio_Detalles.setText(String.valueOf(productoSeleccionado.getPrecio()));
         etCantidad_Detalles.setText(String.valueOf(productoSeleccionado.getCantidad()));
         etDescripcion_Detalles.setText(productoSeleccionado.getDescripcion());
 
+        //hacemos un control para saber is el producto tiene imagen, en cuyo caso la carga, o sino tiene cargará una por defecto
         if (productoSeleccionado.getImagen() != null && productoSeleccionado.getImagen().length > 0) {
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(productoSeleccionado.getImagen(), 0, productoSeleccionado.getImagen().length);
@@ -68,6 +70,7 @@ public class DetallesProductosActivity extends AppCompatActivity {
 
         }
 
+        //al pulsar el boton modificar se llamará al metodo modificarProducto de la clase miDBHelper con los nuevos datos
         buttonModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +87,9 @@ public class DetallesProductosActivity extends AppCompatActivity {
             }
         });
 
+        //al pulsar el boton eliminar se mostrará un dialogo preguntando si estamos seguros, si respondemos afirmativamente
+        //se llamará al metodo eliminar, y se mostrará un toast confirmando que el producto ha sido eliminado y volveremos
+        //a la ventana anterior
         buttonEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +112,7 @@ public class DetallesProductosActivity extends AppCompatActivity {
                     }
                 });
 
+                //opción de cancelar en el diálogo, en caso de ser seleccionado, desaparecerá el dialogo
                 dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -114,7 +121,7 @@ public class DetallesProductosActivity extends AppCompatActivity {
 
                     }
                 });
-
+                //mostrar el dialogo
                 dialogo1.show();
 
             }
@@ -123,7 +130,7 @@ public class DetallesProductosActivity extends AppCompatActivity {
     }
 
 
-
+    //configurar el boton para volver atrás en el toolbar
     public void addBackButtonInToolbar(Toolbar toolbar, AppCompatActivity appCompatActivity){
 
         appCompatActivity.setSupportActionBar(toolbar);

@@ -16,10 +16,16 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.List;
 
+//clase para la creacion de metodos relacionados con la base de datos
 public class MiDBHelper extends SQLiteOpenHelper {
 
+    //nombre de la base de datos
     private static final String DATABASE_NAME = "bd_Almacenes";
+
+    //version de la base de datos
     private static final int DATABASE_VERSION = 5;
+
+    //metodos que implementa la clase SQLiteOpenHelder
     public MiDBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -28,23 +34,29 @@ public class MiDBHelper extends SQLiteOpenHelper {
         super(context, name, factory, version, errorHandler);
     }
 
+    //constructor de esta clase, nos servirá para poder usar metodos de esta clase en nuestras ventanas
     @RequiresApi(api = Build.VERSION_CODES.P)
     public MiDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //metodo que ejecutara las sentencias de creacion de las tablas de la base de datos
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        //creacion tabla productos
         String createTableProductos = "CREATE TABLE productos(id_producto integer PRIMARY KEY, nombre varchar(50), descripcion varchar(500) DEFAULT NULL, precio decimal(10,2), imagen BLOB, cantidad integer, UNIQUE (nombre))";
         db.execSQL(createTableProductos);
 
+        //creacion tabla pedidos
         String createTablePedidos = "CREATE TABLE pedidos(id_pedido integer PRIMARY KEY, id_producto integer, cantidad integer, id_cliente integer, FOREIGN KEY (id_producto) REFERENCES productos(id_producto), FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente))";
         db.execSQL(createTablePedidos);
 
+        //creacion tabla clientes
         String createTableClientes = "CREATE TABLE clientes(id_cliente integer PRIMARY KEY, nombre_fiscal varchar(50), nombre_empresa varchar(50), calle varchar(35), numero integer, cp integer(5), ciudad varchar(40))";
         db.execSQL(createTableClientes);
 
+        //creacion tabla usuarios
         String createTableUsuarios = "CREATE TABLE usuarios(id_usuario varchar(20) PRIMARY KEY, contrasena varchar(20), isEmpleado bool, id_cliente integer, FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente))";
         db.execSQL(createTableUsuarios);
 
@@ -128,6 +140,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //metood para actualizar las tablas
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -138,6 +151,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //metodo para insertar productos
     public void insertarProductos(String nombre,int cantidad, double precio, String descripcion, byte[] imagen){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -153,6 +167,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //metodo para insertar clientes (utilidad en el futuro)
     public void insertarClientes(String nombreFiscal, String nombreEmpresa, String calle, int numero, int cp, String ciudad) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -169,6 +184,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     }
 
 
+    //metodo que nos devuelve una lista con todos los datos de los clientes (utilidad en el futuro)
     @SuppressLint("Range")
     public List<Cliente> obtenerDatosClientes(){
         List<Cliente> listaClientes = new ArrayList<>();
@@ -204,6 +220,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         return listaClientes;
     }
 
+    // metodo para inertar usuarios (utilidad en el futuro)
     public void insertarUsuarios(String id_usuario, String contrasena, boolean isEmpleado, int idCliente) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -217,6 +234,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //metodo que nos permitirá registrarnos
     public void registro (String id_usuario, String contrasena, int idCliente) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -232,6 +250,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //metodo para comprobar si existe el cliente pasando el id como dato
     public Boolean existeCliente(int id_cliente) {
         SQLiteDatabase db = null;
         Cursor cursor = null;
@@ -261,6 +280,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         return existe;
     }
 
+    //metodo que nos devolverá una lista con todos los datos de los usuarios
     public List<Usuario> obtenerDatosUsuarios(){
         List<Usuario> listaUsuarios = new ArrayList<>();
 
@@ -293,6 +313,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         return listaUsuarios;
     }
 
+    //metodo para obtener un usuario pasándole su id como parámetro
     @SuppressLint("Range")
     public Usuario obtenerUsuario(String id_usuario) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -318,6 +339,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     }
 
 
+    //metodo para comprobar si existe un usuario pasándole su id como dato
     public Boolean existeUsuario(String id_usuario) {
         SQLiteDatabase db = null;
         Cursor cursor = null;
@@ -347,6 +369,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         return existe;
     }
 
+    //metodo para comprobar la contraseña
     @SuppressLint("Range")
     public Boolean comprobarContrasena(String id_usuario, String contrasenaIn) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -372,6 +395,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     }
 
 
+    //metodo para insertar pedidos en la base de datos
     public void insertarPedidos(int id_producto, int cantidad, int id_cliente){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -384,6 +408,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    //método que devuelve una lista con todos los datos de los pedidos
     @SuppressLint("Range")
     public List<Pedido> obtenerDatosPedidos(){
         List<Pedido> listaPedidos = new ArrayList<>();
@@ -415,6 +440,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         return listaPedidos;
     }
 
+    //metodo que devuelve los datos de los pedidos que ha realizado un usuario en concreto
     @SuppressLint("Range")
     public List<Pedido> obtenerDatosPedidosUsuario(String id_usuario){
         List<Pedido> listaPedidos = new ArrayList<>();
@@ -447,6 +473,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         return listaPedidos;
     }
 
+    //metodo para obtener los datos de los productos
     public List<Producto> obtenerDatosProductos(){
 
         List<Producto> listaProductos = new ArrayList<>();
@@ -481,6 +508,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     }
 
 
+    //método para poder modificar los productos
     public void modificarProducto(int id, String nombre, int cantidad, double precio, String descripcion, byte[] imagen){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -501,6 +529,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    //metodo para poder eliminar un producto pasando el id_producto como parámetro
     public void eliminarProducto(int id_producto){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -509,7 +538,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
 
     }
 
-
+    //método para eliminar un pedido pasando el id_pedido como parámetro
     public void eliminarPedido(int id_pedido){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -518,6 +547,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //método para obtener un cliente en concreto pasando un id como parámetro
     @SuppressLint("Range")
     public Cliente obtenerCliente(int id_cliente) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -546,6 +576,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         return cliente;
     }
 
+    //método para buscar un producto por su nomrbe
     public Producto obtenerProductoPorNombre(String nombreBuscar) {
         SQLiteDatabase db = this.getReadableDatabase();
 
