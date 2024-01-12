@@ -481,7 +481,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void modificarProducto(int id, String nombre, int cantidad, double precio, String descripcion, byte[] imagen){
+    public void modificarProducto(int id, String nombre, double precio, String descripcion, byte[] imagen){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -490,7 +490,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         values.put("nombre", nombre);
         values.put("descripcion", descripcion);
         values.put("precio", precio);
-        values.put("cantidad", cantidad);
+        //values.put("cantidad", cantidad);
         values.put("imagen", imagen);
 
         String whereClause = "id_producto = ?";
@@ -545,5 +545,31 @@ public class MiDBHelper extends SQLiteOpenHelper {
         db.close();
         return cliente;
     }
+
+    public Producto obtenerProductoPorNombre(String nombreBuscar) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM productos WHERE nombre = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{nombreBuscar});
+
+        Producto producto = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id_producto"));
+            @SuppressLint("Range") String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+            @SuppressLint("Range") double precio = Double.parseDouble(cursor.getString(cursor.getColumnIndex("precio")));
+            @SuppressLint("Range") int cantidad = Integer.parseInt(cursor.getString(cursor.getColumnIndex("cantidad")));
+            @SuppressLint("Range") String descripcion = cursor.getString(cursor.getColumnIndex("descripcion"));
+            @SuppressLint("Range") byte[] imagen = cursor.getBlob(cursor.getColumnIndex("imagen"));
+
+            producto = new Producto(id, nombre, precio, cantidad, descripcion, imagen);
+            cursor.close();
+        }
+
+        db.close();
+        return producto;
+    }
+
+
 
 }

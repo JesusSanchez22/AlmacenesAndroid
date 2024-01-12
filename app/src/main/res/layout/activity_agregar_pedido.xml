@@ -8,11 +8,13 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarAddPedido"
-        android:layout_width="412dp"
-        android:layout_height="64dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="52dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,45 +23,36 @@
     <Button
         android:id="@+id/btnAgregarPedido"
         android:layout_width="154dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="37dp"
         android:text="Añadir"
-        app:layout_constraintEnd_toEndOf="@+id/etIdCliente"
-        app:layout_constraintStart_toStartOf="@+id/etIdCliente"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancelarPedido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etIdCliente" />
 
     <Button
         android:id="@+id/btnCancelarPedido"
         android:layout_width="153dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="36dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="92dp"
         android:text="Cancelar"
         android:textColorHighlight="#FD1515"
         android:textColorLink="#F61C1C"
-        app:layout_constraintEnd_toEndOf="@+id/etIdCliente"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="@+id/etIdCliente"
-        app:layout_constraintTop_toBottomOf="@+id/btnAgregarPedido"
-        app:rippleColor="#E40E0E" />
-
-    <EditText
-        android:id="@+id/etIdProductoPedido"
-        android:layout_width="213dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAgregarPedido"
+        app:rippleColor="#E40E0E" />
 
     <EditText
         android:id="@+id/etCantidadPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/tvIdCliente"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -67,9 +60,10 @@
         android:id="@+id/etIdCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/btnAgregarPedido"
         app:layout_constraintStart_toStartOf="@+id/tvIdCliente"
         app:layout_constraintTop_toBottomOf="@+id/tvIdCliente" />
 
@@ -77,19 +71,21 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="Id del producto:"
+        android:text="Nombre del producto:"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/etIdProductoPedido"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerProducto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarAddPedido" />
 
     <TextView
         android:id="@+id/tvIdCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="12dp"
         android:text="Id del cliente:"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/etIdCliente"
         app:layout_constraintStart_toStartOf="@+id/etCantidadPedido"
         app:layout_constraintTop_toBottomOf="@+id/etCantidadPedido" />
 
@@ -97,9 +93,21 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="12dp"
         android:text="Cantidad del pedido:"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/etIdProductoPedido"
-        app:layout_constraintTop_toBottomOf="@+id/etIdProductoPedido" />
+        app:layout_constraintBottom_toTopOf="@+id/etCantidadPedido"
+        app:layout_constraintEnd_toEndOf="@+id/btnAgregarPedido"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerProducto" />
+
+    <Spinner
+        android:id="@+id/spinnerProducto"
+        android:layout_width="153dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 </androidx.constraintlayout.widget.ConstraintLayout>
