@@ -88,17 +88,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, ProductosActivity.class);
             startActivity(intent);
         }
-
-        if(id==R.id.opcionClientes){
-            Intent intent = new Intent(MainActivity.this, ClientesActivity.class);
-            startActivity(intent);
-        }
-
-        if(id==R.id.opcionConfiguracion){
-
-
-        }
-
         return super.onOptionsItemSelected(item);
     }
 }

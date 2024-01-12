@@ -67,10 +67,7 @@ public class MainClientesActivity extends AppCompatActivity {
         listaCliente.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainClientesActivity.this, DetallesPedidos.class);
-                startActivity(intent);
-
-                pedidoSeleccionado = (Pedido) listaCliente.getItemAtPosition(position);
+                //En un futuro se agregará una pantalla con los detalles del cliente/usuario
 
             }
         });
@@ -79,7 +76,7 @@ public class MainClientesActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menuopciones,menu);
+        getMenuInflater().inflate(R.menu.menuopciones_cliente,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -87,19 +84,9 @@ public class MainClientesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
-        if(id==R.id.opcionProductos){
-            Intent intent = new Intent(MainClientesActivity.this, ProductosActivity.class);
+        if(id==R.id.opcionInfo){
+            Intent intent = new Intent(MainClientesActivity.this, ProfileActivity.class);
             startActivity(intent);
-        }
-
-        if(id==R.id.opcionClientes){
-            Intent intent = new Intent(MainClientesActivity.this, ClientesActivity.class);
-            startActivity(intent);
-        }
-
-        if(id==R.id.opcionConfiguracion){
-
-
         }
 
         return super.onOptionsItemSelected(item);

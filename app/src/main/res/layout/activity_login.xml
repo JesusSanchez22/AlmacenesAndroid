@@ -96,5 +96,15 @@
         app:layout_constraintStart_toEndOf="@+id/etPasswordLogin"
         app:layout_constraintTop_toTopOf="@+id/etPasswordLogin" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="169dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

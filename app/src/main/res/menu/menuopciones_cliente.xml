@@ -3,6 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/opcionProductos"
-        android:title="Productos" />
+        android:id="@+id/opcionInfo"
+        android:title="Información Usuarios" />
 </menu>

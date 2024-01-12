@@ -36,6 +36,7 @@
         android:layout_width="153dp"
         android:layout_height="0dp"
         android:layout_marginBottom="92dp"
+        android:onClick="cancelar"
         android:text="Cancelar"
         android:textColorHighlight="#FD1515"
         android:textColorLink="#F61C1C"
@@ -103,11 +104,12 @@
 
     <Spinner
         android:id="@+id/spinnerProducto"
-        android:layout_width="153dp"
-        android:layout_height="0dp"
+        android:layout_width="260dp"
+        android:layout_height="69dp"
         android:layout_marginBottom="49dp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,7 +67,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         valoresProducto2.put("precio", 24.99);
         valoresProducto2.put("cantidad", 500);
 
-        db.insert("productos", null, valoresProducto1);
+        db.insert("productos", null, valoresProducto2);
 
 
         // Inserción de cliente
@@ -481,7 +481,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void modificarProducto(int id, String nombre, double precio, String descripcion, byte[] imagen){
+    public void modificarProducto(int id, String nombre, int cantidad, double precio, String descripcion, byte[] imagen){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -490,7 +490,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         values.put("nombre", nombre);
         values.put("descripcion", descripcion);
         values.put("precio", precio);
-        //values.put("cantidad", cantidad);
+        values.put("cantidad", cantidad);
         values.put("imagen", imagen);
 
         String whereClause = "id_producto = ?";

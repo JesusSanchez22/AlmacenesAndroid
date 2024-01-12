@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.almaceneskikoandroid.MiDBHelper;
 import com.example.almaceneskikoandroid.Producto;
 import com.example.almaceneskikoandroid.R;
+import com.example.almaceneskikoandroid.functions.Funciones;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
@@ -72,20 +73,27 @@ public class AgregarProductoActivity extends AppCompatActivity {
         fbConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AgregarProductoActivity.this, "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
 
                 String nombre = String.valueOf(etNombre.getText());
                 String precio_string = String.valueOf(etPrecio.getText());
                 String cantidad_string = String.valueOf(etCantidad.getText());
                 String descripcion = String.valueOf(etDescripcion.getText());
 
-                double precio = Double.parseDouble(precio_string);
+                try {
+                    double precio = Double.parseDouble(precio_string);
 
-                int cantidad = Integer.parseInt(cantidad_string);
+                    int cantidad = Integer.parseInt(cantidad_string);
 
-                dbHelper.insertarProductos(nombre, cantidad, precio, descripcion, imagen);
+                    dbHelper.insertarProductos(nombre, cantidad, precio, descripcion, imagen);
 
-                mediaPlayer.start();
+                    mediaPlayer.start();
+
+                } catch(NumberFormatException e){
+                    Funciones.mostrarToastCorto(AgregarProductoActivity.this, "Precio y cantidad deben ser números");
+                }
+
+
+                Toast.makeText(AgregarProductoActivity.this, "Producto agregado correctamente", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(AgregarProductoActivity.this, ProductosActivity.class);
                 startActivity(intent);

@@ -72,12 +72,12 @@ public class DetallesProductosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                int id = Integer.parseInt(String.valueOf(tvId_Producto.getText()));
+                int id = productoSeleccionado.getId_producto();
                 String nombre = String.valueOf(etNombre_Detalles.getText());
                 double precio = Double.parseDouble(String.valueOf(etPrecio_Detalles.getText()));
-                int cantidad = productoSeleccionado.getId_producto();
+                int cantidad = Integer.parseInt(String.valueOf(etCantidad_Detalles.getText()));
                 String descripcion = String.valueOf(etDescripcion_Detalles.getText());
-                //byte[] imagen = imageView.
+
 
                 miDBHelper.modificarProducto(id, nombre, cantidad, precio, descripcion, productoSeleccionado.getImagen());
 

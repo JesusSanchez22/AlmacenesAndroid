@@ -136,4 +136,14 @@ public class AgregarPedido extends AppCompatActivity {
         });
 
     }
+
+    public void cancelar(View v){
+        if (usuarioLogIn.isEmpleado()){
+            Intent i = new Intent(AgregarPedido.this, MainActivity.class);
+            startActivity(i);
+        } else{
+            Intent i = new Intent(AgregarPedido.this, MainClientesActivity.class);
+            startActivity(i);
+        }
+    }
 }
