@@ -60,10 +60,10 @@ public class ProductosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                productoSeleccionado = (Producto)lista.getItemAtPosition(position);
+
                 Intent intent = new Intent(ProductosActivity.this, DetallesProductosActivity.class);
                 startActivity(intent);
-
-                productoSeleccionado = (Producto)lista.getItemAtPosition(position);
 
             }
         });

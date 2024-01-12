@@ -76,31 +76,4 @@ public class MainClientesActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menuopciones,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-
-        if(id==R.id.opcionProductos){
-            Intent intent = new Intent(MainClientesActivity.this, ProductosActivity.class);
-            startActivity(intent);
-        }
-
-        if(id==R.id.opcionClientes){
-            Intent intent = new Intent(MainClientesActivity.this, ClientesActivity.class);
-            startActivity(intent);
-        }
-
-        if(id==R.id.opcionConfiguracion){
-
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
