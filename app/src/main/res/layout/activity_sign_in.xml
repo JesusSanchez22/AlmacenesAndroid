@@ -7,11 +7,11 @@
     tools:context=".Ventanas.SignIn">
 
     <TextView
-        android:id="@+id/tvNIF"
+        android:id="@+id/tvIdClienteSignIn"
         android:layout_width="230dp"
         android:layout_height="34dp"
         android:layout_marginTop="20dp"
-        android:text="NIF:"
+        android:text="Id de cliente:"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/etPasswordSignIn2"
         app:layout_constraintTop_toBottomOf="@+id/etPasswordSignIn2" />
@@ -110,14 +110,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tvUsuarioSignIn" />
 
     <EditText
-        android:id="@+id/etUserSignIn2"
+        android:id="@+id/etIdClienteSignIn"
         android:layout_width="250dp"
         android:layout_height="46dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/tvNIF"
-        app:layout_constraintTop_toBottomOf="@+id/tvNIF" />
+        app:layout_constraintStart_toStartOf="@+id/tvIdClienteSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/tvIdClienteSignIn" />
 
     <Button
         android:id="@+id/btnBackSignIn"
@@ -125,6 +125,7 @@
         android:layout_height="61dp"
         android:layout_marginStart="52dp"
         android:layout_marginBottom="68dp"
+        android:onClick="volverLogIn"
         android:text="Volver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

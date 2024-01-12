@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.almaceneskikoandroid.MiDBHelper;
@@ -43,19 +44,21 @@ public class DetallesProductosActivity extends AppCompatActivity {
         Button buttonModificar = findViewById(R.id.buttonModificar);
         Button buttonEliminar = findViewById(R.id.buttonEliminar);
 
-        EditText etID_Detalles = findViewById(R.id.etID_Detalles);
+        //EditText etID_Detalles = findViewById(R.id.etID_Detalles);
+        TextView tvId_Producto = findViewById(R.id.tvId_Producto);
         EditText etNombre_Detalles = findViewById(R.id.etNombre_Detalles);
         EditText etPrecio_Detalles = findViewById(R.id.etPrecio_Detalles);
-        //EditText etCantidad_Detalles = findViewById(R.id.etCantidad_Detalles);
+        EditText etCantidad_Detalles = findViewById(R.id.etCantidad_Detalles);
         EditText etDescripcion_Detalles = findViewById(R.id.etDescripcion_Detalles);
         ImageView imageView = findViewById(R.id.imageView);
 
         MiDBHelper miDBHelper = new MiDBHelper(this);
 
-        etID_Detalles.setText(String.valueOf(productoSeleccionado.getId_producto()));
+        //etID_Detalles.setText(String.valueOf(productoSeleccionado.getId_producto()));
+        tvId_Producto.setText("Id del producto: " + String.valueOf(productoSeleccionado.getId_producto()));
         etNombre_Detalles.setText(productoSeleccionado.getNombre());
         etPrecio_Detalles.setText(String.valueOf(productoSeleccionado.getPrecio()));
-        //etCantidad_Detalles.setText(String.valueOf(productoSeleccionado.getCantidad()));
+        etCantidad_Detalles.setText(String.valueOf(productoSeleccionado.getCantidad()));
         etDescripcion_Detalles.setText(productoSeleccionado.getDescripcion());
 
         if (productoSeleccionado.getImagen() != null && productoSeleccionado.getImagen().length > 0) {
@@ -69,14 +72,14 @@ public class DetallesProductosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                int id = Integer.parseInt(String.valueOf(etID_Detalles.getText()));
+                int id = Integer.parseInt(String.valueOf(tvId_Producto.getText()));
                 String nombre = String.valueOf(etNombre_Detalles.getText());
                 double precio = Double.parseDouble(String.valueOf(etPrecio_Detalles.getText()));
-                //int cantidad = Integer.parseInt(String.valueOf(etCantidad_Detalles.getText()));
+                int cantidad = productoSeleccionado.getId_producto();
                 String descripcion = String.valueOf(etDescripcion_Detalles.getText());
                 //byte[] imagen = imageView.
 
-                miDBHelper.modificarProducto(id, nombre, precio, descripcion, productoSeleccionado.getImagen());
+                miDBHelper.modificarProducto(id, nombre, cantidad, precio, descripcion, productoSeleccionado.getImagen());
 
             }
         });

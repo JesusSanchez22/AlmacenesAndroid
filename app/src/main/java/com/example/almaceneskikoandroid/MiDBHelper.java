@@ -56,6 +56,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         valoresProducto1.put("nombre", "Vino Tinto Reserva");
         valoresProducto1.put("descripcion", "Vino tinto de alta calidad");
         valoresProducto1.put("precio", 19.99);
+        valoresProducto1.put("cantidad", 100);
 
         db.insert("productos", null, valoresProducto1);
 
@@ -64,6 +65,9 @@ public class MiDBHelper extends SQLiteOpenHelper {
         valoresProducto2.put("nombre", "Vino Blanco Especial");
         valoresProducto2.put("descripcion", "Vino blanco de cosecha especial");
         valoresProducto2.put("precio", 24.99);
+        valoresProducto2.put("cantidad", 500);
+
+        db.insert("productos", null, valoresProducto1);
 
 
         // Inserción de cliente
@@ -211,6 +215,50 @@ public class MiDBHelper extends SQLiteOpenHelper {
         db.insert("usuarios", null, values);
         db.close();
 
+    }
+
+    public void registro (String id_usuario, String contrasena, int idCliente) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("id_usuario", id_usuario);
+        values.put("contrasena", contrasena);
+        values.put("isEmpleado", 0); //No es empleado
+        values.put("id_cliente", idCliente);
+
+        db.insert("usuarios", null, values);
+        db.close();
+
+    }
+
+    public Boolean existeCliente(int id_cliente) {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        Boolean existe = false;
+
+        try {
+            db = this.getReadableDatabase();
+
+            String query = "SELECT * FROM clientes WHERE id_cliente = ?";
+            cursor = db.rawQuery(query, new String[]{String.valueOf(id_cliente)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                existe = true;
+            }
+        } catch (Exception e) {
+            // Manejar excepciones (puedes imprimir el error para depuración)
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+
+        return existe;
     }
 
     public List<Usuario> obtenerDatosUsuarios(){
@@ -433,7 +481,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void modificarProducto(int id, String nombre, double precio, String descripcion, byte[] imagen){
+    public void modificarProducto(int id, String nombre, int cantidad, double precio, String descripcion, byte[] imagen){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -442,7 +490,7 @@ public class MiDBHelper extends SQLiteOpenHelper {
         values.put("nombre", nombre);
         values.put("descripcion", descripcion);
         values.put("precio", precio);
-        //values.put("cantidad", cantidad);
+        values.put("cantidad", cantidad);
         values.put("imagen", imagen);
 
         String whereClause = "id_producto = ?";

@@ -27,7 +27,7 @@ public class login extends AppCompatActivity {
     private TextView txtRegistro;
 
     //Perfil 1
-    private String user1 = "jesusm";
+    private String user1 = "raulp";
     private String passwordUser1 = "123";
 
     MiDBHelper dbHelper;
