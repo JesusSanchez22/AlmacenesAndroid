@@ -61,8 +61,12 @@ public class DetallesProductosActivity extends AppCompatActivity {
         etDescripcion_Detalles.setText(productoSeleccionado.getDescripcion());
 
 
-        Bitmap bitmap = BitmapFactory.decodeByteArray(productoSeleccionado.getImagen(), 0, productoSeleccionado.getImagen().length);
-        imageView.setImageBitmap(bitmap);
+        if(productoSeleccionado.getImagen()!=null && productoSeleccionado.getImagen().length > 0){
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(productoSeleccionado.getImagen(), 0, productoSeleccionado.getImagen().length);
+            imageView.setImageBitmap(bitmap);
+
+        }
 
 
 
